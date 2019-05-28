@@ -1,0 +1,18 @@
+html(lang="en")
+  head
+    title= pageTitle
+    link(href='LessTest.css', rel='stylesheet')
+    script
+      | if (foo) {
+      |    bar()
+      | }
+  body
+    h1 Jade - node template engine
+    #container.testClass
+      - youAreUsingJade = false
+      - if (youAreUsingJade)
+         p You are amazing
+      - else
+        ul
+          - for (var x = 0; x < 3; x++)
+            li Get on it!
