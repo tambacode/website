@@ -1,0 +1,27 @@
+
+<html lang="en">
+  <head>
+    <title>Firebase Tests</title>
+    <link href="./css/style.css" rel="stylesheet"/>
+    <!--The core Firebase JS SDK is always required and must be listed first-->
+    <!--https://firebase.google.com/docs/web/setup#config-web-app-->
+    <script src="https://www.gstatic.com/firebasejs/6.1.0/firebase-app.js"> </script>
+    <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-storage.js"></script>
+  </head>
+  <body>
+    <h1 id="bigOne">Text</h1>
+    <progress value="0" max="100" id="uploader">0%</progress>
+    <input type="file" value="upload" id="fileButton"/>
+    <script src="./javascript/firebaseApp.js"> </script>
+    <script src="./javascript/uploadFile.js"> v</script>
+    <script>
+      var database = firebaseApp.database();
+      
+      // Change value on text
+      var bigOne = document.getElementById('bigOne');
+      var dbRef = database.ref().child('text');
+      dbRef.on('value', snap => bigOne.innerText = snap.val());
+    </script>
+  </body>
+</html>
