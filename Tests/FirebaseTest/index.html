@@ -3,25 +3,46 @@
   <head>
     <title>Firebase Tests</title>
     <link href="./css/style.css" rel="stylesheet"/>
+    <!--linh(href="https://fonts.googleapis.com/css?family=Roboto:300,500" rel="stylesheet")-->
     <!--The core Firebase JS SDK is always required and must be listed first-->
     <!--https://firebase.google.com/docs/web/setup#config-web-app-->
     <script src="https://www.gstatic.com/firebasejs/6.1.0/firebase-app.js"> </script>
     <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-auth.js"></script>
   </head>
   <body>
-    <h1 id="bigOne">Text</h1>
-    <progress value="0" max="100" id="uploader">0%</progress>
-    <input type="file" value="upload" id="fileButton"/>
-    <script src="./javascript/firebaseApp.js"> </script>
-    <script src="./javascript/uploadFile.js"> v</script>
-    <script>
-      var database = firebaseApp.database();
-      
-      // Change value on text
-      var bigOne = document.getElementById('bigOne');
-      var dbRef = database.ref().child('text');
-      dbRef.on('value', snap => bigOne.innerText = snap.val());
-    </script>
+    <div>
+      <p>Text update</p>
+      <h1 id="bigOne">Text</h1>
+    </div>
+    <hr/>
+    <div>
+      <p>File upload</p>
+      <p id="uploadMsg" class="red hide"></p>
+      <progress id="uploader" value="0" max="100">0%</progress>
+      <input id="fileButton" type="file" value="upload"/>
+    </div>
+    <hr/>
+    <div>
+      <p>Login</p>
+      <p id="loginMsg" class="red hide"></p>
+      <input id="txtEmail" type="email" placeholder="Email"/>
+      <input id="txtPassword" type="password" placeholder="Password"/><br/>
+      <button id="btnLogin" class="btn btn-action">Log In</button>
+      <button id="btnSignUp" class="btn btn-secondary">Sign Up</button>
+      <button id="btnLogout" class="btn btn-action hide">Log Out</button>
+    </div>
   </body>
+  <script src="./javascript/firebaseApp.js"> </script>
+  <script src="./javascript/uploadFile.js"></script>
+  <script src="./javascript/authTutorial.js"></script>
+  <script>
+    var database = firebaseApp.database();
+    
+    // Change value on text
+    var bigOne = document.getElementById('bigOne');
+    var dbRef = database.ref().child('text');
+    dbRef.on('value', snap => bigOne.innerText = snap.val());
+  </script>
 </html>

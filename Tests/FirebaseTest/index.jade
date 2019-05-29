@@ -1,25 +1,46 @@
 html(lang="en")
     head
         title= "Firebase Tests"
-        link(href='./css/style.css', rel='stylesheet')
+        link(href="./css/style.css", rel="stylesheet")
+        //linh(href="https://fonts.googleapis.com/css?family=Roboto:300,500" rel="stylesheet")
         
         //The core Firebase JS SDK is always required and must be listed first
         //https://firebase.google.com/docs/web/setup#config-web-app
         script(src="https://www.gstatic.com/firebasejs/6.1.0/firebase-app.js")  
         script(src="https://www.gstatic.com/firebasejs/5.9.1/firebase-database.js")
         script(src="https://www.gstatic.com/firebasejs/5.9.1/firebase-storage.js")
+        script(src="https://www.gstatic.com/firebasejs/5.9.1/firebase-auth.js")
     body
-        h1(id="bigOne") Text
+        div
+            p Text update
+            h1#bigOne Text
+        
+        hr
+        div
+            p File upload
+            p#uploadMsg.red.hide
+            progress#uploader(value="0" max="100") 0%
+            input#fileButton(type="file" value="upload")
+        
+        hr
+        div
+            p Login
+            p#loginMsg.red.hide
+            input#txtEmail(type="email" placeholder="Email")
+            input#txtPassword(type="password" placeholder="Password")
+            br
+            button#btnLogin.btn.btn-action Log In
+            button#btnSignUp.btn.btn-secondary Sign Up
+            button#btnLogout.btn.btn-action.hide Log Out
 
-        progress(value="0" max="100" id="uploader") 0%
-        input(type="file" value="upload" id="fileButton")
 
-        script(src="./javascript/firebaseApp.js")  
-        script(src="./javascript/uploadFile.js")  v
-        script.
-            var database = firebaseApp.database();
-
-            // Change value on text
-            var bigOne = document.getElementById('bigOne');
-            var dbRef = database.ref().child('text');
-            dbRef.on('value', snap => bigOne.innerText = snap.val());
+    script(src="./javascript/firebaseApp.js")  
+    script(src="./javascript/uploadFile.js")
+    script(src="./javascript/authTutorial.js")
+    script.
+        var database = firebaseApp.database();
+        
+        // Change value on text
+        var bigOne = document.getElementById('bigOne');
+        var dbRef = database.ref().child('text');
+        dbRef.on('value', snap => bigOne.innerText = snap.val());

@@ -1,6 +1,18 @@
 // Upload file
-var uploader = document.getElementById("uploader");
-var fileButton = document.getElementById("fileButton");
+const uploader = document.getElementById('uploader');
+const fileButton = document.getElementById('fileButton');
+const uploadMsg = document.getElementById('uploadMsg');
+
+SetUploadMsg = function(p, msg) {
+    p.innerHTML = msg;
+
+    if (msg == '')
+    {
+        p.classList.add('hide');
+    } else {
+        p.classList.remove('hide');
+    }
+}
 
 // Listen for file selection
 fileButton.addEventListener('change', function(e) {
@@ -13,6 +25,8 @@ fileButton.addEventListener('change', function(e) {
     // Upload file
     var task = storageRef.put(file);
 
+    SetUploadMsg(uploadMsg, 'Uploading');
+
     // Update progress bar
     task.on('state_changed',
         function progress(snapshot) {
@@ -20,10 +34,10 @@ fileButton.addEventListener('change', function(e) {
             uploader.value = perc;
         },
         function error(err) {
-            console.log("IMAGE UPLOAD ERROR");
+            SetUploadMsg(uploadMsg, 'Image Upload Error');
         },
         function complete() {
-            console.log("IMAGE UPLOADED");
+            SetUploadMsg(uploadMsg, 'Image Uploaded');
         }
     );
 });
