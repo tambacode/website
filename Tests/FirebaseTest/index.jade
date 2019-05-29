@@ -33,14 +33,19 @@ html(lang="en")
             button#btnSignUp.btn.btn-secondary Sign Up
             button#btnLogout.btn.btn-action.hide Log Out
 
-
     script(src="./javascript/firebaseApp.js")  
     script(src="./javascript/uploadFile.js")
     script(src="./javascript/authTutorial.js")
     script.
         var database = firebaseApp.database();
         
-        // Change value on text
+        //Change value on text
         var bigOne = document.getElementById('bigOne');
         var dbRef = database.ref().child('text');
-        dbRef.on('value', snap => bigOne.innerText = snap.val());
+
+        // Sync object changes
+        // Other types of 'on' actions (child_added, child_changed, child_removed)
+        dbRef.on('value', snap => {
+            // snap.key has the item key in the DB
+            bigOne.innerText = JSON.stringify(snap.val(), null, 3);
+        });
